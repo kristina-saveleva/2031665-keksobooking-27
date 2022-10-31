@@ -1,4 +1,4 @@
-function getRandomNumber(min, max) {
+function getRandom(min, max) {
   if (min >= max || min <= 0) {
     return NaN;
   } else {
@@ -6,15 +6,11 @@ function getRandomNumber(min, max) {
   }
 }
 
-const randomNumber = getRandomNumber(2, 33);
-
-function roundRandomNumber() {
-  return Math.round(randomNumber);
+function getRandomNumber(min,max){
+  return Math.round(getRandom(min, max))
 }
 
-function getRandomNumberDot(dot) {
-  return randomNumber.toFixed(dot);
-}
 
-roundRandomNumber();
-getRandomNumberDot(2);
+function getRandomNumberDot(min, max, dot) {
+  return getRandom(min, max).toFixed(dot);
+}
