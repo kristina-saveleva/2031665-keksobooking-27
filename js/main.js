@@ -6,6 +6,8 @@ function getRandomNumber(min, max) {
   }
 }
 
+let randomNumber = getRandomNumber(2, 33);
+
 function roundRandomNumber() {
   return Math.round(randomNumber);
 }
@@ -14,6 +16,5 @@ function getRandomNumberDot(dot) {
   return randomNumber.toFixed(dot);
 }
 
-let randomNumber = getRandomNumber(2, 33);
 roundRandomNumber();
 getRandomNumberDot(2);
