@@ -1,18 +1,19 @@
-function rundomNumber(min, max) {
+function getRandomNumber(min, max) {
   if (min >= max || min <= 0) {
     return NaN;
   } else {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+    return Math.random() * (max - min + 1) + min;
   }
 }
-console.log(rundomNumber(4, 22));
 
-function rundomNumbersDot(min, max, dot) {
-  if (min >= max || min <= 0) {
-    return NaN;
-  } else {
-    let number = Math.random() * (max - min + 1) + min;
-    return number.toFixed(dot);
-  }
+function roundRandomNumber() {
+  return Math.round(randomNumber);
 }
-console.log(rundomNumbersDot(2, 400, 4));
+
+function getRandomNumberDot(dot) {
+  return randomNumber.toFixed(dot);
+}
+
+let randomNumber = getRandomNumber(2, 33);
+roundRandomNumber();
+getRandomNumberDot(2);
