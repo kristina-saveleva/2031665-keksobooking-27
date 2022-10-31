@@ -14,3 +14,7 @@ function getRandomNumber(min,max){
 function getRandomNumberDot(min, max, dot) {
   return getRandom(min, max).toFixed(dot);
 }
+
+getRandom();
+getRandomNumber();
+getRandomNumberDot();
