@@ -6,7 +6,7 @@ function getRandomNumber(min, max) {
   }
 }
 
-let randomNumber = getRandomNumber(2, 33);
+const randomNumber = getRandomNumber(2, 33);
 
 function roundRandomNumber() {
   return Math.round(randomNumber);
