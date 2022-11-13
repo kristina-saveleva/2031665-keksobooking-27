@@ -47,13 +47,13 @@ const features = [
   'washer',
   'elevator',
   'conditioner'
-]
+];
 
 const photos = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'
-]
+];
 
 function getRandom(min, max) {
   if (min >= max || min <= 0) {
@@ -76,25 +76,25 @@ getRandomNumber();
 getRandomNumberDot();
 
 function getRandomArrayElement(elements) {
-  const random = (getRandomNumber(1, elements.length-1)) - 1;
+  const random = (getRandomNumber(1, elements.length-1))-1;
   return elements[random];
 }
 
 const createPlaceTitle = function () {
-  return getRandomArrayElement(description) + " " + getRandomArrayElement(place)
+  return `${getRandomArrayElement(description)} ${getRandomArrayElement(place)}`;
 };
 
 const getImageByIndex = function (i) {
   if (i < 10) {
-    return `img/avatar/user0${i}.png`
+    return `img/avatar/user0${i}.png`;
   } else {
-    return `img/avatar/user${i}.png`
+    return `img/avatar/user${i}.png`;
   }
-}
+};
 
 const getMapAddress = function () {
-  return 'lat:' + getRandomNumberDot(1, 90, 3) + ', ' + 'lng:' + getRandomNumberDot(1, 180, 3);
-}
+  return `lat: ${getRandomNumberDot(1, 90, 3)}, lng:${getRandomNumberDot(1, 180, 3)}`;
+};
 
 const generateArray = function () {
   const result = [];
@@ -120,11 +120,11 @@ const generateArray = function () {
         lat: getRandomNumberDot(35.65000, 35.70000, 5),
         lng: getRandomNumberDot(139.70000, 139.80000, 5)
       }
-    }
-    result[i - 1] = objectResult
+    };
+    result[i - 1] = objectResult;
   }
   return result;
-}
+};
 
 function getRandomLength(arr) {
   return arr.slice(0, getRandomNumber(1, features.length));
@@ -136,5 +136,7 @@ function getFeatures(arr) {
     newArray = arr.sort(() => Math.random() - 0.5);
     newArray = getRandomLength(newArray);
   }
-  return newArray
+  return newArray;
 }
+
+generateArray();
