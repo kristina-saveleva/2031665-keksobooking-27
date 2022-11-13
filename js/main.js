@@ -76,7 +76,7 @@ getRandomNumber();
 getRandomNumberDot();
 
 function getRandomArrayElement(elements) {
-  const random = (getRandomNumber(1, elements.length-1))-1;
+  const random = (getRandomNumber(1, elements.length - 1)) - 1;
   return elements[random];
 }
 
