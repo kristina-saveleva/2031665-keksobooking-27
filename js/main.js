@@ -55,16 +55,16 @@ const photos = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'
 ];
 
-const maxImageIndex = 10;
-const latitude = 90;
-const longitude = 180;
-const maxPriceForRoom = 14000;
-const maxNumberGuests = 8;
-const maxNumberRooms = 14;
-const minLatLocationValue = 35.65000;
-const maxLatLocationValue = 35.70000;
-const minLngLocationValue = 139.70000;
-const maxLngLocationValue = 139.80000;
+const MAX_IMAGE_INDEX = 10;
+const LATITUDE = 90;
+const LONGITUDE = 180;
+const MAX_PRICE_FOR_ROOM = 14000;
+const MAX_NUMBER_GUESTS = 8;
+const MAX_NUMBER_ROOMS = 14;
+const MIN_LAT_LOCATION_VALUE = 35.65000;
+const MAX_LAT_LOCATION_VALUE = 35.70000;
+const MIN_LNG_LOCATION_VALUE = 139.70000;
+const MAX_LNG_LOCATION_VALUE = 139.80000;
 
 function getRandom(min, max) {
   if (min >= max || min <= 0) {
@@ -96,7 +96,7 @@ const createPlaceTitle = function () {
 };
 
 const getImageByIndex = function (i) {
-  if (i < maxImageIndex) {
+  if (i < MAX_IMAGE_INDEX) {
     return `img/avatar/user0${i}.png`;
   } else {
     return `img/avatar/user${i}.png`;
@@ -104,12 +104,12 @@ const getImageByIndex = function (i) {
 };
 
 const getMapAddress = function () {
-  return `lat: ${getRandomNumberDot(1, latitude, 3)}, lng:${getRandomNumberDot(1, longitude, 3)}`;
+  return `lat: ${getRandomNumberDot(1, LATITUDE, 3)}, lng:${getRandomNumberDot(1, LONGITUDE, 3)}`;
 };
 
 const generateArray = function () {
   const result = [];
-  for (let i = 1; i <= maxImageIndex; i++) {
+  for (let i = 1; i <= MAX_IMAGE_INDEX; i++) {
     const objectResult = {
       author: {
         avatar: getImageByIndex(i)
@@ -117,10 +117,10 @@ const generateArray = function () {
       offer: {
         title: createPlaceTitle(description, place),
         address: getMapAddress(),
-        price: getRandomNumber(1, maxPriceForRoom),
+        price: getRandomNumber(1, MAX_PRICE_FOR_ROOM),
         type: getRandomArrayElement(type),
-        rooms: getRandomNumber(1, maxNumberRooms),
-        guests: getRandomNumber(1, maxNumberGuests),
+        rooms: getRandomNumber(1, MAX_NUMBER_ROOMS),
+        guests: getRandomNumber(1, MAX_NUMBER_GUESTS),
         checkin: getRandomArrayElement(checkin),
         checkout: getRandomArrayElement(checkout),
         features: getFeatures(features),
@@ -128,8 +128,8 @@ const generateArray = function () {
         photo: getRandomLength(photos)
       },
       location: {
-        lat: getRandomNumberDot(minLatLocationValue, maxLatLocationValue, 5),
-        lng: getRandomNumberDot(minLngLocationValue, maxLngLocationValue, 5)
+        lat: getRandomNumberDot(MIN_LAT_LOCATION_VALUE, MAX_LAT_LOCATION_VALUE, 5),
+        lng: getRandomNumberDot(MIN_LNG_LOCATION_VALUE, MAX_LNG_LOCATION_VALUE, 5)
       }
     };
     result[i - 1] = objectResult;
