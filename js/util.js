@@ -1,68 +1,3 @@
-export const place = [
-  'место',
-  'гнездышко',
-  'предложение',
-  'приключение',
-  'пристанище',
-  'жилье',
-  'укрытие',
-  'прибежище'
-];
-
-export const checkin = [
-  '12:00',
-  '13:00',
-  '14:00'
-];
-
-export const checkout = [
-  '12:00',
-  '13:00',
-  '14:00'
-];
-
-export const features = [
-  'wifi',
-  'dishwasher',
-  'parking',
-  'washer',
-  'elevator',
-  'conditioner'
-];
-
-export const photos = [
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'
-];
-
-export const description = [
-  'Лучшее',
-  'Красивое',
-  'Уютное',
-  'Приятное',
-  'Милое',
-  'Удивительное',
-  'Популярное',
-  'Сказочное'
-];
-
-export const type = [
-  'palace',
-  'flat',
-  'house',
-  'bungalow',
-  'hotel'
-];
-
-export const MAX_IMAGE_INDEX = 10;
-export const MAX_PRICE_FOR_ROOM = 14000;
-export const MAX_NUMBER_GUESTS = 8;
-export const MAX_NUMBER_ROOMS = 14;
-export const MIN_LAT_LOCATION_VALUE = 35.65000;
-export const MAX_LAT_LOCATION_VALUE = 35.70000;
-export const MIN_LNG_LOCATION_VALUE = 139.70000;
-export const MAX_LNG_LOCATION_VALUE = 139.80000;
 const LATITUDE = 90;
 const LONGITUDE = 180;
 
@@ -81,11 +16,6 @@ export function getRandomNumber(min, max) {
 export function getRandomNumberDot(min, max, dot) {
   return getRandom(min, max).toFixed(dot);
 }
-
-getRandom();
-getRandomNumber();
-getRandomNumberDot();
-
 
 export function getRandomArrayElement(elements) {
   const random = (getRandomNumber(1, elements.length - 1)) - 1;
