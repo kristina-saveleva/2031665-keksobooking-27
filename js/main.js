@@ -150,4 +150,4 @@ function getFeatures(arr) {
   return newArray;
 }
 
-console.log(generateArray());
+generateArray();
