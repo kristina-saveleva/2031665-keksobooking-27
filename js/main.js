@@ -1,3 +1,3 @@
 import {generateArray} from './data.js';
 
-generateArray();
+console.log(generateArray());
