@@ -55,6 +55,17 @@ const photos = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'
 ];
 
+const maxImageIndex = 10;
+const latitude = 90;
+const longitude = 180;
+const maxPriceForRoom = 14000;
+const maxNumberGuests = 8;
+const maxNumberRooms = 14;
+const minLatLocationValue = 35.65000;
+const maxLatLocationValue = 35.70000;
+const minLngLocationValue = 139.70000;
+const maxLngLocationValue = 139.80000;
+
 function getRandom(min, max) {
   if (min >= max || min <= 0) {
     return NaN;
@@ -85,7 +96,7 @@ const createPlaceTitle = function () {
 };
 
 const getImageByIndex = function (i) {
-  if (i < 10) {
+  if (i < maxImageIndex) {
     return `img/avatar/user0${i}.png`;
   } else {
     return `img/avatar/user${i}.png`;
@@ -93,12 +104,12 @@ const getImageByIndex = function (i) {
 };
 
 const getMapAddress = function () {
-  return `lat: ${getRandomNumberDot(1, 90, 3)}, lng:${getRandomNumberDot(1, 180, 3)}`;
+  return `lat: ${getRandomNumberDot(1, latitude, 3)}, lng:${getRandomNumberDot(1, longitude, 3)}`;
 };
 
 const generateArray = function () {
   const result = [];
-  for (let i = 1; i <= 10; i++) {
+  for (let i = 1; i <= maxImageIndex; i++) {
     const objectResult = {
       author: {
         avatar: getImageByIndex(i)
@@ -106,10 +117,10 @@ const generateArray = function () {
       offer: {
         title: createPlaceTitle(description, place),
         address: getMapAddress(),
-        price: getRandomNumber(1, 140000),
+        price: getRandomNumber(1, maxPriceForRoom),
         type: getRandomArrayElement(type),
-        rooms: getRandomNumber(1, 14),
-        guests: getRandomNumber(1, 6),
+        rooms: getRandomNumber(1, maxNumberRooms),
+        guests: getRandomNumber(1, maxNumberGuests),
         checkin: getRandomArrayElement(checkin),
         checkout: getRandomArrayElement(checkout),
         features: getFeatures(features),
@@ -117,8 +128,8 @@ const generateArray = function () {
         photo: getRandomLength(photos)
       },
       location: {
-        lat: getRandomNumberDot(35.65000, 35.70000, 5),
-        lng: getRandomNumberDot(139.70000, 139.80000, 5)
+        lat: getRandomNumberDot(minLatLocationValue, maxLatLocationValue, 5),
+        lng: getRandomNumberDot(minLngLocationValue, maxLngLocationValue, 5)
       }
     };
     result[i - 1] = objectResult;
@@ -139,4 +150,4 @@ function getFeatures(arr) {
   return newArray;
 }
 
-generateArray();
+console.log(generateArray());
