@@ -36,7 +36,7 @@ export const photos = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'
 ];
 
-const description = [
+export const description = [
   'Лучшее',
   'Красивое',
   'Уютное',
@@ -47,7 +47,7 @@ const description = [
   'Сказочное'
 ];
 
-const type = [
+export const type = [
   'palace',
   'flat',
   'house',
@@ -107,8 +107,6 @@ export const getImageByIndex = function (i) {
 export const getMapAddress = function () {
   return `lat: ${getRandomNumberDot(1, LATITUDE, 3)}, lng:${getRandomNumberDot(1, LONGITUDE, 3)}`;
 };
-
-
 
 export function getRandomLength(arr) {
   return arr.slice(0, getRandomNumber(1, features.length));

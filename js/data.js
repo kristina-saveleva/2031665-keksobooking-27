@@ -1,4 +1,4 @@
-import {MAX_IMAGE_INDEX, getImageByIndex, createPlaceTitle, place, getMapAddress, getRandomNumber, MAX_PRICE_FOR_ROOM, getRandomArrayElement, MAX_NUMBER_ROOMS, MAX_NUMBER_GUESTS, checkin, checkout, getFeatures, features, getRandomLength, photos, getRandomNumberDot, MIN_LAT_LOCATION_VALUE, MAX_LAT_LOCATION_VALUE, MIN_LNG_LOCATION_VALUE, MAX_LNG_LOCATION_VALUE} from './util.js';
+import {MAX_IMAGE_INDEX, getImageByIndex, createPlaceTitle, place, getMapAddress, getRandomNumber, MAX_PRICE_FOR_ROOM, getRandomArrayElement, MAX_NUMBER_ROOMS, MAX_NUMBER_GUESTS, checkin, checkout, getFeatures, features, getRandomLength, photos, getRandomNumberDot, MIN_LAT_LOCATION_VALUE, MAX_LAT_LOCATION_VALUE, MIN_LNG_LOCATION_VALUE, MAX_LNG_LOCATION_VALUE, description, type} from './util.js';
 
 export const generateArray = function () {
   const result = [];
