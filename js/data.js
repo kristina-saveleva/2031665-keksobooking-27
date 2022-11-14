@@ -10,7 +10,7 @@ export const place = [
   'укрытие',
   'прибежище'
 ];
-  
+
 const checkin = [
   '12:00',
   '13:00',
@@ -22,7 +22,7 @@ const checkout = [
   '13:00',
   '14:00'
 ];
-  
+
 export const features = [
   'wifi',
   'dishwasher',
@@ -31,7 +31,7 @@ export const features = [
   'elevator',
   'conditioner'
 ];
-  
+
 const photos = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
@@ -48,7 +48,7 @@ export const description = [
   'Популярное',
   'Сказочное'
 ];
-  
+
 const type = [
   'palace',
   'flat',

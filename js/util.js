@@ -6,20 +6,20 @@ function getRandom(min, max) {
   } else {
     return Math.random() * (max - min + 1) + min;
   }
-};
+}
 
 export function getRandomNumber(min, max) {
   return Math.round(getRandom(min, max));
-};
+}
 
 export function getRandomNumberDot(min, max, dot) {
   return getRandom(min, max).toFixed(dot);
-};
+}
 
 export function getRandomArrayElement(elements) {
   const random = (getRandomNumber(1, elements.length - 1)) - 1;
   return elements[random];
-};
+}
 
 export const createPlaceTitle = function () {
   return `${getRandomArrayElement(description)} ${getRandomArrayElement(place)}`;
