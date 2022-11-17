@@ -1,7 +1,7 @@
 import { generateArray } from './data.js';
 
-var makeElement = function (tagName, className, text) {
-  var element = document.createElement(tagName);
+let makeElement = function (tagName, className, text) {
+  let element = document.createElement(tagName);
   element.classList.add(className);
   if (text) {
     element.textContent = text;
@@ -9,22 +9,22 @@ var makeElement = function (tagName, className, text) {
   return element;
 };
 
-var elementsArray = generateArray();
-export var createCards = function () {
-  var cards = [];
-  for (var i = 0; i < elementsArray.length; i++) {
+let elementsArray = generateArray();
+export let createCards = function () {
+  let cards = [];
+  for (let i = 0; i < elementsArray.length; i++) {
     cards[i] = createCard(elementsArray[i]);
   }
   return cards
 }
 
-var createCard = function (product) {
-  var listItem = makeElement('article', 'popup');
-  var title = makeElement('h3', 'popup__title', product.offer.title);
+let createCard = function (product) {
+  let listItem = makeElement('article', 'popup');
+  let title = makeElement('h3', 'popup__title', product.offer.title);
   listItem.appendChild(title);
-  var address = makeElement('p', 'popup__text--address', product.offer.address);
+  let address = makeElement('p', 'popup__text--address', product.offer.address);
   listItem.appendChild(address);
-  var price = makeElement('p', 'popup__text--price', product.offer.price + ' ₽/ночь');
+  let price = makeElement('p', 'popup__text--price', product.offer.price + ' ₽/ночь');
   listItem.appendChild(price);
   function whichType() {
     let typeOfHouse = product.offer.type;
@@ -40,17 +40,17 @@ var createCard = function (product) {
       return 'Отель'
     }
   }
-  var type = makeElement('h4', 'popup__type', whichType());
+  let type = makeElement('h4', 'popup__type', whichType());
   listItem.appendChild(type);
-  var sizeRoom = makeElement('p', 'popup__text--capacity', product.offer.rooms + ' комнаты для ' + product.offer.guests + ' гостей');
+  let sizeRoom = makeElement('p', 'popup__text--capacity', product.offer.rooms + ' комнаты для ' + product.offer.guests + ' гостей');
   listItem.appendChild(sizeRoom);
-  var checkTime = makeElement('p', 'popup__text--time', 'Заезд после ' + product.offer.checkin + ', выезд до ' + product.offer.checkout);
+  let checkTime = makeElement('p', 'popup__text--time', 'Заезд после ' + product.offer.checkin + ', выезд до ' + product.offer.checkout);
   listItem.appendChild(checkTime);
-  var features = makeElement('ul', 'popup__features');
+  let features = makeElement('ul', 'popup__features');
   listItem.appendChild(features);
-  var featureArray = product.offer.features;
-  for (var i = 0; i < featureArray.length; i++) {
-    var featuresItem = makeElement('li', 'popup__feature', featureArray[i]);
+  let featureArray = product.offer.features;
+  for (let i = 0; i < featureArray.length; i++) {
+    let featuresItem = makeElement('li', 'popup__feature', featureArray[i]);
     let featuresItemOne = featureArray[i];
     if (featuresItemOne === 'wifi') {
       featuresItem.classList.add('popup__feature--wifi')
@@ -67,33 +67,33 @@ var createCard = function (product) {
     }
     features.appendChild(featuresItem);
   }
-  var description = makeElement('p', 'popup__description', product.offer.description);
+  let description = makeElement('p', 'popup__description', product.offer.description);
   listItem.appendChild(description);
-  var photoList = makeElement('div', 'popup__photos');
+  let photoList = makeElement('div', 'popup__photos');
   listItem.appendChild(photoList);
   let photoArray = product.offer.photo;
-  for (var i = 0; i < photoArray.length; i++) {
-    var photos = makeElement('img', 'popup__photos', photoArray[i]);
+  for (let i = 0; i < photoArray.length; i++) {
+    let photos = makeElement('img', 'popup__photos', photoArray[i]);
     photoList.appendChild(photos);
   }
-  var picture = makeElement('img', 'popup__avatar');
+  let picture = makeElement('img', 'popup__avatar');
   picture.src = product.author.avatar;
   picture.alt = 'Фото жилья';
   listItem.appendChild(picture);
   return listItem;
 };
 let firstCard = createCards();
-var getCard = function () {
+let getCard = function () {
   firstCard;
-  for (var i = 0; i < firstCard.length; i++) {
+  for (let i = 0; i < firstCard.length; i++) {
     firstCard = firstCard[i]
   }
   return firstCard
 }
 firstCard = getCard();
-var templateProfile = document.querySelector('#card').content;
-var article = templateProfile.querySelector('.popup');
-var task = article.cloneNode(true);
+let templateProfile = document.querySelector('#card').content;
+let article = templateProfile.querySelector('.popup');
+let task = article.cloneNode(true);
 task = firstCard;
-var containerMessages = document.querySelector('.map__canvas');
+let containerMessages = document.querySelector('.map__canvas');
 containerMessages.appendChild(task);
