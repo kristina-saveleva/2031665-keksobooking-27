@@ -15,7 +15,7 @@ const createCard = function (product) {
   listItem.appendChild(title);
   const address = makeElement('p', 'popup__text--address', product.offer.address);
   listItem.appendChild(address);
-  const price = makeElement('p', 'popup__text--price', product.offer.price + ' ₽/ночь');
+  const price = makeElement('p', 'popup__text--price', `${product.offer.price} ₽/ночь`);
   listItem.appendChild(price);
   function whichType() {
     const typeOfHouse = product.offer.type;
