@@ -1,4 +1,4 @@
-import { generateArray } from './data.js'
+import { generateArray } from './data.js';
 const cardTemplate = document.querySelector('#card').content;
 
 const typeOfHouse = {
@@ -51,6 +51,5 @@ export const renderCard = function (card) {
 
 const data = generateArray();
 const firstCardData = data[0];
-const firstCard = createCard(firstCardData)
-renderCard(firstCard)
-
+const firstCard = createCard(firstCardData);
+renderCard(firstCard);
