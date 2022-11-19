@@ -1,3 +1,2 @@
 import {generateArray} from './data.js';
-
-generateArray();
+import {renderCard} from './createCard.js';
