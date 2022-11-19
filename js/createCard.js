@@ -1,7 +1,7 @@
 import { generateArray } from './data.js';
 
 const templateProfile = document.querySelector('#card').content;
-let article = templateProfile.querySelector('.popup');
+const article = templateProfile.querySelector('.popup');
 
 const typeOfHouse = {
   flat: 'Квартира',
@@ -9,10 +9,10 @@ const typeOfHouse = {
   house: 'Дом',
   palace: 'Дворец',
   hotelra: 'Отель'
-}
+};
 
 const createCard = function (product) {
-  let task = article.cloneNode(true);
+  const task = article.cloneNode(true);
   const containerMessages = document.querySelector('.map__canvas');
   task.querySelector('.popup__title').textContent = product.offer.title;
   task.querySelector('.popup__text--price').textContent = `${product.offer.price} ₽/ночь`;
@@ -20,23 +20,22 @@ const createCard = function (product) {
   task.querySelector('.popup__type').textContent = typeOfHouse[product.offer.type];
   task.querySelector('.popup__text--capacity').textContent = `${product.offer.rooms} комнаты для ${product.offer.guests} гостей`;
   task.querySelector('.popup__text--time').textContent = `Заезд после ${product.offer.checkin} выезд до ${product.offer.checkout}`;
-  const featuresArray = product.offer.features;
   if (product.offer.features.length !== 0) {
     task.querySelector('.popup__features').innerHTML = '';
       var feature;
-      for (var i = 0; i < product.offer.features.length; i++) {
-        feature = document.createElement('li');
-        feature.classList.add('popup__feature');
-        feature.classList.add('popup__feature--' + product.offer.features[i]);
-        task.querySelector('.popup__features').appendChild(feature);
+    for (var i = 0; i < product.offer.features.length; i++) {
+      feature = document.createElement('li');
+      feature.classList.add('popup__feature');
+      feature.classList.add(`popup__feature--${product.offer.features[i]}`);
+      task.querySelector('.popup__features').appendChild(feature);
     }
   } else {
     task.querySelector('.popup__features').remove();
-  }
-  var photoTemplate = task.querySelector('.popup__photo');
+}
+  const photoTemplate = task.querySelector('.popup__photo');
   task.querySelector('.popup__photos').innerHTML = '';
-  var photography;
-  for (var j = 0; j < product.offer.photo.length; j++) {
+  const photography;
+  for (const j = 0; j < product.offer.photo.length; j++) {
     photography = photoTemplate.cloneNode(true);
     photography.src = product.offer.photo[j];
     task.querySelector('.popup__photos').appendChild(photography);
@@ -53,5 +52,5 @@ export const createCards = function (data) {
   return cards;
 };
 
-const data = generateArray();
-createCards(data);
+const dataArray = generateArray();
+createCards(dataArray);
