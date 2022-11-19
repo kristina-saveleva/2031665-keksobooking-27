@@ -20,13 +20,13 @@ const createCard = function (product) {
   task.querySelector('.popup__text--time').textContent = `Заезд после ${product.offer.checkin} выезд до ${product.offer.checkout}`;
   if (product.offer.features.length !== 0) {
     task.querySelector('.popup__features').innerHTML = '';
-      let feature;
-  for (let i = 0; i < product.offer.features.length; i++) {
+    let feature;
+    for (let i = 0; i < product.offer.features.length; i++) {
       feature = document.createElement('li');
       feature.classList.add('popup__feature');
       feature.classList.add(`popup__feature--${product.offer.features[i]}`);
       task.querySelector('.popup__features').appendChild(feature);
-  }
+    }
   } else {
     task.querySelector('.popup__features').remove();
   }
