@@ -11,7 +11,7 @@ const typeOfHouse = {
   hotelra: 'Отель'
 };
 
-const createCard = function (product) {
+  const createCard = function (product) {
   const task = article.cloneNode(true);
   const containerMessages = document.querySelector('.map__canvas');
   task.querySelector('.popup__title').textContent = product.offer.title;
@@ -34,8 +34,8 @@ const createCard = function (product) {
 }
   const photoTemplate = task.querySelector('.popup__photo');
   task.querySelector('.popup__photos').innerHTML = '';
-  const photography;
-  for (const j = 0; j < product.offer.photo.length; j++) {
+  let photography;
+  for (let j = 0; j < product.offer.photo.length; j++) {
     photography = photoTemplate.cloneNode(true);
     photography.src = product.offer.photo[j];
     task.querySelector('.popup__photos').appendChild(photography);
@@ -51,6 +51,3 @@ export const createCards = function (data) {
   cards.push(createCard(data[0]));
   return cards;
 };
-
-const dataArray = generateArray();
-createCards(dataArray);
