@@ -1,4 +1,3 @@
-/* global Pristine:readonly */
 const adForm = document.querySelector('.ad-form');
 const adFormElement = adForm.querySelectorAll('fieldset');
 const mapFilters = document.querySelector('.map__filters');
@@ -34,21 +33,21 @@ const pristine = new Pristine(adForm, {
 
 function validateTitle(value) {
   if(value.length < 30 || value.length > 100){
-    buttonSubmit.classList.add('ad-form--disabled')
-    return false
+    buttonSubmit.classList.add('ad-form--disabled');
+    return false;
   } else {
-    buttonSubmit.classList.remove('ad-form--disabled')
-    return true
+    buttonSubmit.classList.remove('ad-form--disabled');
+    return true;
   }
 }
 
 function validatePrice(value) {
   if(value < 100000){
-    buttonSubmit.classList.remove('ad-form--disabled')
-    return true
+    buttonSubmit.classList.remove('ad-form--disabled');
+    return true;
   } else {
-    buttonSubmit.classList.add('ad-form--disabled')
-    return false
+    buttonSubmit.classList.add('ad-form--disabled');
+    return false;
   }
 }
 
@@ -59,8 +58,7 @@ const roomOption = {
   '2': ['1', '2'],
   '3': ['1', '2', '3'],
   '100': ['0']
-}
-    
+};
 
 function validateDelivery () {
   return roomOption[roomField.value].includes(capacityField.value);
@@ -83,10 +81,10 @@ pristine.addValidator(
 pristine.addValidator(
   adForm.querySelector('#price'),
   validatePrice,
-  'Максимальное значение — 100 000'
+  'Максимальное значение —100 000'
 );
 
-adForm.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-  pristine.validate()
+adForm.addEventListener('submit', () => {
+//   evt.preventDefault();
+  pristine.validate();
 });
