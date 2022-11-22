@@ -1,4 +1,3 @@
-import { generateArray } from './data.js';
 const cardTemplate = document.querySelector('#card').content;
 
 const typeOfHouse = {
@@ -9,7 +8,7 @@ const typeOfHouse = {
   hotelra: 'Отель'
 };
 
-const createCard = function (cardData) {
+export const createCard = function (cardData) {
   const card = cardTemplate.cloneNode(true);
 
   card.querySelector('.popup__title').textContent = cardData.offer.title;
@@ -48,8 +47,3 @@ export const renderCard = function (card) {
   const map = document.querySelector('.map__canvas');
   map.appendChild(card);
 };
-
-const data = generateArray();
-const firstCardData = data[0];
-const firstCard = createCard(firstCardData);
-renderCard(firstCard);

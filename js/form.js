@@ -11,7 +11,7 @@ export const inactivPage = function () {
   slider.classList.add('disabled');
 };
 
-const activePage = function () {
+export const activePage = function () {
   adForm.classList.remove('ad-form--disabled');
   adFormElement.forEach((element) => element.classList.remove('disabled'));
   mapFilters.classList.remove('ad-form--disabled');
@@ -19,7 +19,6 @@ const activePage = function () {
 };
 
 inactivPage();
-activePage();
 
 
 const pristine = new Pristine(adForm, {
