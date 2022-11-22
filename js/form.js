@@ -2,7 +2,6 @@ const adForm = document.querySelector('.ad-form');
 const adFormElement = adForm.querySelectorAll('fieldset');
 const mapFilters = document.querySelector('.map__filters');
 const slider = adForm.querySelector('.ad-form__slider');
-const buttonSubmit = adForm.querySelector('.ad-form__submit');
 
 
 export const inactivPage = function () {
@@ -17,7 +16,6 @@ const activePage = function () {
   adFormElement.forEach((element) => element.classList.remove('disabled'));
   mapFilters.classList.remove('ad-form--disabled');
   slider.classList.remove('disabled');
-  buttonSubmit.classList.add('ad-form--disabled');
 };
 
 inactivPage();
@@ -33,20 +31,16 @@ const pristine = new Pristine(adForm, {
 
 function validateTitle(value) {
   if(value.length < 30 || value.length > 100){
-    buttonSubmit.classList.add('ad-form--disabled');
     return false;
   } else {
-    buttonSubmit.classList.remove('ad-form--disabled');
     return true;
   }
 }
 
 function validatePrice(value) {
   if(value < 100000){
-    buttonSubmit.classList.remove('ad-form--disabled');
     return true;
   } else {
-    buttonSubmit.classList.add('ad-form--disabled');
     return false;
   }
 }
