@@ -86,14 +86,10 @@ export const resetPristine = () => {
 export const setUserFormSubmit = () => {
   adForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
-
     const isValid = pristine.validate();
     if (isValid) {
-      sendData(
-        () => openSuccessMessage(),
-        () => openErrorMessage(),
-        new FormData(evt.target),
-      );
+      sendData(openSuccessMessage, openErrorMessage, new FormData(evt.target));
     }
   });
 };
+
