@@ -1,9 +1,7 @@
 import { activePage } from './form.js';
 import { createCard } from './createCard.js';
-import {renderCards} from './createCard.js';
 const countryCenterLat = 35.6761919;
 const countryCenterLng = 139.6503106;
-const mapForm = document.querySelector('.map__filters');
 export const map = L.map('map-canvas')
   .on('load', () => {
     activePage();
@@ -45,13 +43,12 @@ export const resetMarkPosition = function(button){
       lat: countryCenterLat,
       lng: countryCenterLng,
     });
-  
     map.setView({
       lat: countryCenterLat,
       lng: countryCenterLng,
     }, 10);
   });
-}
+};
 
 const icon = L.icon({
   iconUrl: './img/pin.svg',
@@ -83,7 +80,7 @@ export const closePopup = () => {
 };
 
 export const renderMarkers = function (cardsData) {
-  cardsData.forEach(cardData => {
-    createMarker(cardData)
+  cardsData.forEach((cardData) => {
+    createMarker(cardData);
   });
 };

@@ -83,7 +83,7 @@ export const resetPristine = () => {
   pristine.reset();
 };
 
-export const setUserFormSubmit = (onSuccess) => {
+export const setUserFormSubmit = () => {
   adForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
@@ -96,4 +96,4 @@ export const setUserFormSubmit = (onSuccess) => {
       );
     }
   });
-}
+};
