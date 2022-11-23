@@ -10,6 +10,5 @@ export const resetFormForAllElements = function(){
 };
 
 buttonReset.addEventListener('click', (evt) => {
-  evt.preventDefault();
-  resetFormForAllElements;
+  resetFormForAllElements();
 });
