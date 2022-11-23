@@ -33,6 +33,8 @@ export const getImageByIndex = function (i) {
   }
 };
 
+export const isEscapeKey = (evt) => evt.key === 'Escape';
+
 export const getMapAddress = function () {
   return `lat: ${getRandomNumberDot(1, LATITUDE, 3)}, lng:${getRandomNumberDot(1, LONGITUDE, 3)}`;
 };

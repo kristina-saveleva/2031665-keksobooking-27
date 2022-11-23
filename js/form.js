@@ -1,3 +1,5 @@
+import { sendData } from './api.js';
+import { openErrorMessage, openSuccessMessage } from './auxiliaryMessages.js';
 const adForm = document.querySelector('.ad-form');
 const adFormElement = adForm.querySelectorAll('fieldset');
 const mapFilters = document.querySelector('.map__filters');
@@ -21,7 +23,7 @@ export const activePage = function () {
 inactivPage();
 
 
-const pristine = new Pristine(adForm, {
+export const pristine = new Pristine(adForm, {
   classTo: 'ad-form__element',
   errorClass: 'ad-form__element--invalid',
   errorTextParent: 'ad-form__element',
@@ -29,7 +31,7 @@ const pristine = new Pristine(adForm, {
 }, true);
 
 function validateTitle(value) {
-  if(value.length < 30 || value.length > 100){
+  if (value.length < 30 || value.length > 100) {
     return false;
   } else {
     return true;
@@ -37,7 +39,7 @@ function validateTitle(value) {
 }
 
 function validatePrice(value) {
-  if(value < 100000){
+  if (value < 100000) {
     return true;
   } else {
     return false;
@@ -53,11 +55,11 @@ const roomOption = {
   '100': ['0']
 };
 
-function validateDelivery () {
+function validateDelivery() {
   return roomOption[roomField.value].includes(capacityField.value);
 }
 
-function getDeliveryErrorMessage () {
+function getDeliveryErrorMessage() {
   return `
   ${roomField.value === '100' ? 'Такое количество гостей невозможно' : 'Количество гостей не соответствует количеству комнат'}
   `;
@@ -77,7 +79,21 @@ pristine.addValidator(
   'Максимальное значение —100 000'
 );
 
-adForm.addEventListener('submit', () => {
-//   evt.preventDefault();
-  pristine.validate();
-});
+export const resetPristine = () => {
+  pristine.reset();
+};
+
+export const setUserFormSubmit = (onSuccess) => {
+  adForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+
+    const isValid = pristine.validate();
+    if (isValid) {
+      sendData(
+        () => openSuccessMessage(),
+        () => openErrorMessage(),
+        new FormData(evt.target),
+      );
+    }
+  });
+}

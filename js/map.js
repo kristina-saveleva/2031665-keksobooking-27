@@ -1,6 +1,6 @@
 import { activePage } from './form.js';
 import { createCard } from './createCard.js';
-import { generateArray } from './data.js';
+import {renderCards} from './createCard.js';
 const countryCenterLat = 35.6761919;
 const countryCenterLng = 139.6503106;
 const mapForm = document.querySelector('.map__filters');
@@ -39,17 +39,19 @@ const mainPinMarker = L.marker(
 
 mainPinMarker.addTo(map);
 
-mapForm.addEventListener('change', () => {
-  mainPinMarker.setLatLng({
-    lat: countryCenterLat,
-    lng: countryCenterLng,
+export const resetMarkPosition = function(button){
+  button.addEventListener('click', () => {
+    mainPinMarker.setLatLng({
+      lat: countryCenterLat,
+      lng: countryCenterLng,
+    });
+  
+    map.setView({
+      lat: countryCenterLat,
+      lng: countryCenterLng,
+    }, 10);
   });
-
-  map.setView({
-    lat: countryCenterLat,
-    lng: countryCenterLng,
-  }, 10);
-});
+}
 
 const icon = L.icon({
   iconUrl: './img/pin.svg',
@@ -59,7 +61,7 @@ const icon = L.icon({
 
 const markerGroup = L.layerGroup().addTo(map);
 
-const createMarker = (cardData) => {
+export const createMarker = (cardData) => {
   const lat = cardData.location.lat;
   const lng = cardData.location.lng;
   const marker = L.marker(
@@ -76,6 +78,12 @@ const createMarker = (cardData) => {
     .bindPopup(createCard(cardData));
 };
 
-generateArray().forEach((cardData) => {
-  createMarker(cardData);
-});
+export const closePopup = () => {
+  map.closePopup();
+};
+
+export const renderMarkers = function (cardsData) {
+  cardsData.forEach(cardData => {
+    createMarker(cardData)
+  });
+};
