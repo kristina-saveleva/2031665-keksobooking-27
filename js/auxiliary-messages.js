@@ -1,4 +1,5 @@
 import { isEscapeKey } from './util.js';
+import { activePage } from './form.js';
 
 const body = document.querySelector('body');
 const sucsessMessageTemplate = document.querySelector('#success').content.querySelector('.success');
@@ -36,6 +37,7 @@ export const openSuccessMessage = () => {
 export const openErrorMessage = () => {
   errorMessage.classList.remove('hidden');
   document.addEventListener('keydown', closeAuxiliaryMessage);
+  activePage();
 };
 
 sucsessMessage.addEventListener('click', () => {

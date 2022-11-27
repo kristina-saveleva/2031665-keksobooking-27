@@ -1,7 +1,8 @@
-import {generateArray} from './data.js';
-import {renderCards} from './createCard.js';
-import {inactivPage, setUserFormSubmit} from './form.js';
-import {map} from './map.js';
-import {sliderElement} from './slider.js';
-import {resetFormForAllElements} from './formReset.js';
-import './server.js';
+import './data.js';
+import './create-card.js';
+import './form.js';
+import './map.js';
+import './slider.js';
+import './form-reset.js';
+import './filter.js';
+import './avatar.js';

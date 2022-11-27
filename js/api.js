@@ -1,17 +1,22 @@
-import { openErrorMessage } from './auxiliaryMessages.js';
-const fetchURL = 'https://27.javascript.pages.academy/keksobooking';
-const fetchURLData = 'https://27.javascript.pages.academy/keksobooking/data';
-
-export const getData = (onSuccess) => {
-  fetch(fetchURLData)
+export const getData = (onSuccess, onError, url) => {
+  fetch(url)
+    .then((response) => {
+      if (response.ok) {
+        return response;
+      }
+      throw new Error(`${response.status} — ${response.statusText}`);
+    })
     .then((response) => response.json())
-    .then((cards) => {
-      onSuccess(cards);
+    .then((data) => {
+      onSuccess(data);
+    })
+    .catch((err) => {
+      onError(err);
     });
 };
 
-export const sendData = (onSuccess, onFail, bodyData) => {
-  fetch(fetchURL,
+export const sendData = (onSuccess, onFail, url, bodyData) => {
+  fetch(url,
     {
       method: 'POST',
       body: bodyData,
@@ -20,7 +25,6 @@ export const sendData = (onSuccess, onFail, bodyData) => {
     .then((response) => {
       if (response.ok) {
         onSuccess();
-        return;
       } else {
         onFail();
       }

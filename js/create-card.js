@@ -1,6 +1,6 @@
 const cardTemplate = document.querySelector('#card').content;
 
-const typeOfHouse = {
+export const typeOfHouse = {
   flat: 'Квартира',
   bungalow: 'Бунгало',
   house: 'Дом',
@@ -16,19 +16,25 @@ export const createCard = function (cardData) {
   card.querySelector('.popup__type').textContent = typeOfHouse[cardData.offer.type];
   card.querySelector('.popup__text--capacity').textContent = `${cardData.offer.rooms} комнаты для ${cardData.offer.guests} гостей`;
   card.querySelector('.popup__text--time').textContent = `Заезд после ${cardData.offer.checkin} выезд до ${cardData.offer.checkout}`;
-  if (cardData.offer.feature !== undefined && cardData.offer.features.length !== 0) {
-    card.querySelector('.popup__features').innerHTML = '';
-    let feature;
-    for (let i = 0; i < cardData.offer.features.length; i++) {
-      feature = document.createElement('li');
-      feature.classList.add('popup__feature');
-      feature.classList.add(`popup__feature--${cardData.offer.features[i]}`);
-      card.querySelector('.popup__features').appendChild(feature);
-    }
+  const similarCard = cardData;
+  if (similarCard.offer.features === undefined) {
+    card.querySelector('.popup__features').hidden = true;
   } else {
-    card.querySelector('.popup__features').remove();
+    const featuresArray = similarCard.offer.features;
+    const featuresContainerElement = card.querySelector('.popup__features');
+    const featureListFragment = document.createDocumentFragment();
+    featuresArray.forEach((features) => {
+      const featureListItem = featuresContainerElement.querySelector(`.popup__feature--${features}`);
+
+      if (featureListItem) {
+        featureListFragment.append(featureListItem);
+      }
+    });
+    featuresContainerElement.innerHTML = '';
+    featuresContainerElement.append(featureListFragment);
   }
-  if (cardData.offer.photos !== undefined && cardData.offer.photos.length !== 0){
+
+  if (cardData.offer.photos !== undefined && cardData.offer.photos.length !== 0) {
     const photoTemplate = card.querySelector('.popup__photo');
     card.querySelector('.popup__photos').innerHTML = '';
     let photography;

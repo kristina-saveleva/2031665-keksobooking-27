@@ -1,10 +1,32 @@
 import { sendData } from './api.js';
-import { openErrorMessage, openSuccessMessage } from './auxiliaryMessages.js';
+import { openErrorMessage, openSuccessMessage } from './auxiliary-messages.js';
+
 const adForm = document.querySelector('.ad-form');
 const adFormElement = adForm.querySelectorAll('fieldset');
 const mapFilters = document.querySelector('.map__filters');
 const slider = adForm.querySelector('.ad-form__slider');
+const submitButton = adForm.querySelector('.ad-form__submit');
+const fetchURL = 'https://27.javascript.pages.academy/keksobooking';
+const timeIn = adForm.querySelector('#timein');
+const timeOut = adForm.querySelector('#timeout');
+const MIN_VALUE_FOR_TITLE = 30;
+const MAX_VALUE_FOR_TITLE = 100;
+const MAX_VALUE_FOR_PRICE = 100000;
 
+const changeTime = (evt) => {
+  timeIn.value = evt.target.value;
+  timeOut.value = evt.target.value;
+};
+timeIn.addEventListener('change', changeTime);
+timeOut.addEventListener('change', changeTime);
+
+export const blockSubmitButton = () => {
+  submitButton.classList.add('disablet');
+};
+
+export const unblockSubmitButton = () => {
+  submitButton.classList.remove('disablet');
+};
 
 export const inactivPage = function () {
   adForm.classList.add('ad-form--disabled');
@@ -20,9 +42,6 @@ export const activePage = function () {
   slider.classList.remove('disabled');
 };
 
-inactivPage();
-
-
 export const pristine = new Pristine(adForm, {
   classTo: 'ad-form__element',
   errorClass: 'ad-form__element--invalid',
@@ -31,7 +50,7 @@ export const pristine = new Pristine(adForm, {
 }, true);
 
 function validateTitle(value) {
-  if (value.length < 30 || value.length > 100) {
+  if (value.length < MIN_VALUE_FOR_TITLE || value.length > MAX_VALUE_FOR_TITLE) {
     return false;
   } else {
     return true;
@@ -39,7 +58,7 @@ function validateTitle(value) {
 }
 
 function validatePrice(value) {
-  if (value < 100000) {
+  if (value < MAX_VALUE_FOR_PRICE) {
     return true;
   } else {
     return false;
@@ -83,13 +102,12 @@ export const resetPristine = () => {
   pristine.reset();
 };
 
-export const setUserFormSubmit = () => {
-  adForm.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-    const isValid = pristine.validate();
-    if (isValid) {
-      sendData(openSuccessMessage, openErrorMessage, new FormData(evt.target));
-    }
-  });
-};
-
+adForm.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+  if (!pristine.validate()) {
+    return;
+  }
+  blockSubmitButton();
+  const formData = new FormData(evt.target);
+  sendData(openSuccessMessage, openErrorMessage, fetchURL, formData);
+});
