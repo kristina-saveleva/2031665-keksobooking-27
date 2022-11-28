@@ -1,6 +1,8 @@
 import { isEscapeKey } from './util.js';
-const body = document.querySelector('body');
+import { activatePageMap } from './map.js';
+
 const ALERT_OPEN_TIME = 5000;
+const body = document.querySelector('body');
 
 export const showAlert = (message) => {
   const alertMessage = document.createElement('div');
@@ -22,6 +24,7 @@ export const showAlert = (message) => {
   setTimeout(() => {
     alertMessage.remove();
   }, ALERT_OPEN_TIME);
+  activatePageMap(false);
 };
 
 const sucsessMessageTemplate = document.querySelector('#success').content.querySelector('.success');
