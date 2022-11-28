@@ -1,17 +1,41 @@
-import { activePage } from './form.js';
-import { createCard } from './createCard.js';
-import { generateArray } from './data.js';
-const countryCenterLat = 35.6761919;
-const countryCenterLng = 139.6503106;
+import { getData } from './api.js';
+import { showAlert } from './auxiliary-messages.js';
+import { createCard } from './create-card.js';
+import { tenCardElements, getFilteredData } from './filter.js';
+
+const adForm = document.querySelector('.ad-form');
 const mapForm = document.querySelector('.map__filters');
+const mapFormFields = mapForm.children;
+const adFormFields = adForm.children;
+const fetchURLData = 'https://27.javascript.pages.academy/keksobooking/data';
+const COUNTRY_CENTER_LAT = 35.6761919;
+const COUNTRY_CENTER_LNG = 139.6503106;
+const ZOOM_OF_MAP = 10;
+const MAIN_ICON_SIZE = [52, 52];
+const MAIN_ICON_SETTINGS = [26, 52];
+const ICON_SIZE = [40, 40];
+const ICON_ANCHOR = [20, 40];
+const addressElement = document.querySelector('#address');
+
+export const activatePage = (activate = false) => {
+  mapForm.classList[activate ? 'remove' : 'add']('map__filters--disabled');
+  adForm.classList[activate ? 'remove' : 'add']('ad-form--disabled');
+  for (const mapFormField of mapFormFields){
+    mapFormField[activate ? 'removeAttribute' : 'setAttribute']('disabled', 'disabled');
+  }
+  for (const adFormField of adFormFields) {
+    adFormField[activate ? 'removeAttribute' : 'setAttribute']('disabled', 'disabled');
+  }
+};
+
 export const map = L.map('map-canvas')
   .on('load', () => {
-    activePage();
+    getData(getFilteredData, showAlert, fetchURLData);
   })
   .setView({
-    lat: countryCenterLat,
-    lng: countryCenterLng,
-  }, 10);
+    lat: COUNTRY_CENTER_LAT,
+    lng: COUNTRY_CENTER_LNG,
+  }, ZOOM_OF_MAP);
 
 L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -22,14 +46,14 @@ L.tileLayer(
 
 const mainPinIcon = L.icon({
   iconUrl: './img/main-pin.svg',
-  iconSize: [52, 52],
-  iconAnchor: [26, 52],
+  iconSize: MAIN_ICON_SIZE,
+  iconAnchor: MAIN_ICON_SETTINGS,
 });
 
 const mainPinMarker = L.marker(
   {
-    lat: countryCenterLat,
-    lng: countryCenterLng,
+    lat: COUNTRY_CENTER_LAT,
+    lng: COUNTRY_CENTER_LNG,
   },
   {
     draggable: true,
@@ -39,43 +63,54 @@ const mainPinMarker = L.marker(
 
 mainPinMarker.addTo(map);
 
-mapForm.addEventListener('change', () => {
-  mainPinMarker.setLatLng({
-    lat: countryCenterLat,
-    lng: countryCenterLng,
-  });
-
-  map.setView({
-    lat: countryCenterLat,
-    lng: countryCenterLng,
-  }, 10);
+mainPinMarker.on('moveend', (evt) => {
+  const mainMarkerСoordinates = evt.target.getLatLng();
+  addressElement.value = `${(mainMarkerСoordinates.lat).toFixed(5)}, ${(mainMarkerСoordinates.lng).toFixed(5)}`;
 });
+
+export const resetMarkPosition = function () {
+  mainPinMarker.setLatLng({
+    lat: COUNTRY_CENTER_LAT,
+    lng: COUNTRY_CENTER_LNG,
+  });
+  map.setView({
+    lat: COUNTRY_CENTER_LAT,
+    lng: COUNTRY_CENTER_LNG,
+  }, ZOOM_OF_MAP);
+};
 
 const icon = L.icon({
   iconUrl: './img/pin.svg',
-  iconSize: [40, 40],
-  iconAnchor: [20, 40],
+  iconSize: ICON_SIZE,
+  iconAnchor: ICON_ANCHOR,
 });
 
 const markerGroup = L.layerGroup().addTo(map);
 
-const createMarker = (cardData) => {
-  const lat = cardData.location.lat;
-  const lng = cardData.location.lng;
-  const marker = L.marker(
-    {
-      lat,
-      lng,
-    },
-    {
-      icon,
-    }
-  );
-  marker
-    .addTo(markerGroup)
-    .bindPopup(createCard(cardData));
+export const deleteMarkerGroupLayer = () => {
+  markerGroup.clearLayers();
 };
 
-generateArray().forEach((cardData) => {
-  createMarker(cardData);
-});
+export const createMarker = (cards = tenCardElements) => {
+  deleteMarkerGroupLayer();
+  for (let i = 0; i < cards.length; i++) {
+    const { lat, lng } = cards[i].location;
+    const marker = L.marker(
+      {
+        lat,
+        lng,
+      },
+      {
+        icon,
+      }
+    );
+    marker
+      .addTo(markerGroup)
+      .bindPopup(createCard(cards[i]));
+  }
+  activatePage(true);
+};
+
+export const closePopup = () => {
+  map.closePopup();
+};
