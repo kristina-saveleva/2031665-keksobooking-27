@@ -1,5 +1,6 @@
 import { sendData } from './api.js';
 import { openErrorMessage, openSuccessMessage } from './auxiliary-messages.js';
+import { resetFormForAllElements } from './form-reset.js';
 
 const adForm = document.querySelector('.ad-form');
 const adFormElement = adForm.querySelectorAll('fieldset');
@@ -21,11 +22,11 @@ timeIn.addEventListener('change', changeTime);
 timeOut.addEventListener('change', changeTime);
 
 export const blockSubmitButton = () => {
-  submitButton.classList.add('disablet');
+  submitButton.classList.add('ad-form--disabled');
 };
 
 export const unblockSubmitButton = () => {
-  submitButton.classList.remove('disablet');
+  submitButton.classList.remove('ad-form--disabled');
 };
 
 export const inactivPage = function () {
@@ -102,6 +103,13 @@ export const resetPristine = () => {
   pristine.reset();
 };
 
+const successDataAction = () => {
+  openSuccessMessage();
+  unblockSubmitButton();
+  resetFormForAllElements();
+  console.log('ff')
+}
+
 adForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
   if (!pristine.validate()) {
@@ -109,5 +117,5 @@ adForm.addEventListener('submit', (evt) => {
   }
   blockSubmitButton();
   const formData = new FormData(evt.target);
-  sendData(openSuccessMessage, openErrorMessage, fetchURL, formData);
+  sendData(successDataAction, openErrorMessage, fetchURL, formData);
 });
