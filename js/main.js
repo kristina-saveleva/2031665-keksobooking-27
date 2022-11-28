@@ -1,3 +1,5 @@
-import {generateArray} from './data.js';
-import {renderCard} from './createCard.js';
-import {inactivPage} from './form.js';
+import './data.js';
+import './util.js';
+import './map.js';
+import './form.js';
+import './avatar.js';

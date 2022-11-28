@@ -1,28 +1,32 @@
+import { sendData } from './api.js';
+import { openErrorMessage, openSuccessMessage } from './auxiliary-messages.js';
+import { resetFormForAllElements } from './form-reset.js';
+
 const adForm = document.querySelector('.ad-form');
-const adFormElement = adForm.querySelectorAll('fieldset');
-const mapFilters = document.querySelector('.map__filters');
-const slider = adForm.querySelector('.ad-form__slider');
+const submitButton = adForm.querySelector('.ad-form__submit');
+const fetchURL = 'https://27.javascript.pages.academy/keksobooking';
+const timeIn = adForm.querySelector('#timein');
+const timeOut = adForm.querySelector('#timeout');
+const MIN_VALUE_FOR_TITLE = 30;
+const MAX_VALUE_FOR_TITLE = 100;
+const MAX_VALUE_FOR_PRICE = 100000;
 
+const changeTime = (evt) => {
+  timeIn.value = evt.target.value;
+  timeOut.value = evt.target.value;
+};
+timeIn.addEventListener('change', changeTime);
+timeOut.addEventListener('change', changeTime);
 
-export const inactivPage = function () {
-  adForm.classList.add('ad-form--disabled');
-  adFormElement.forEach((element) => element.classList.add('disabled'));
-  mapFilters.classList.add('ad-form--disabled');
-  slider.classList.add('disabled');
+export const blockSubmitButton = () => {
+  submitButton.classList.add('ad-form--disabled');
 };
 
-const activePage = function () {
-  adForm.classList.remove('ad-form--disabled');
-  adFormElement.forEach((element) => element.classList.remove('disabled'));
-  mapFilters.classList.remove('ad-form--disabled');
-  slider.classList.remove('disabled');
+export const unblockSubmitButton = () => {
+  submitButton.classList.remove('ad-form--disabled');
 };
 
-inactivPage();
-activePage();
-
-
-const pristine = new Pristine(adForm, {
+export const pristine = new Pristine(adForm, {
   classTo: 'ad-form__element',
   errorClass: 'ad-form__element--invalid',
   errorTextParent: 'ad-form__element',
@@ -30,7 +34,7 @@ const pristine = new Pristine(adForm, {
 }, true);
 
 function validateTitle(value) {
-  if(value.length < 30 || value.length > 100){
+  if (value.length < MIN_VALUE_FOR_TITLE || value.length > MAX_VALUE_FOR_TITLE) {
     return false;
   } else {
     return true;
@@ -38,7 +42,7 @@ function validateTitle(value) {
 }
 
 function validatePrice(value) {
-  if(value < 100000){
+  if (value < MAX_VALUE_FOR_PRICE) {
     return true;
   } else {
     return false;
@@ -54,11 +58,11 @@ const roomOption = {
   '100': ['0']
 };
 
-function validateDelivery () {
+function validateDelivery() {
   return roomOption[roomField.value].includes(capacityField.value);
 }
 
-function getDeliveryErrorMessage () {
+function getDeliveryErrorMessage() {
   return `
   ${roomField.value === '100' ? 'Такое количество гостей невозможно' : 'Количество гостей не соответствует количеству комнат'}
   `;
@@ -78,7 +82,27 @@ pristine.addValidator(
   'Максимальное значение —100 000'
 );
 
-adForm.addEventListener('submit', () => {
-//   evt.preventDefault();
-  pristine.validate();
+export const resetPristine = () => {
+  pristine.reset();
+};
+
+const successDataAction = () => {
+  openSuccessMessage();
+  unblockSubmitButton();
+  resetFormForAllElements();
+};
+
+const errorDataActions = () => {
+  openErrorMessage();
+  unblockSubmitButton();
+};
+
+adForm.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+  if (!pristine.validate()) {
+    return;
+  }
+  blockSubmitButton();
+  const formData = new FormData(evt.target);
+  sendData(successDataAction, errorDataActions, fetchURL, formData);
 });
