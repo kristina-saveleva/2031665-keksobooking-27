@@ -1,5 +1,5 @@
 import { isEscapeKey } from './util.js';
-import { activatePage } from './map.js'
+import { activatePage } from './map.js';
 const body = document.querySelector('body');
 const ALERT_OPEN_TIME = 5000;
 
