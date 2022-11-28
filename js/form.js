@@ -3,9 +3,6 @@ import { openErrorMessage, openSuccessMessage } from './auxiliary-messages.js';
 import { resetFormForAllElements } from './form-reset.js';
 
 const adForm = document.querySelector('.ad-form');
-const adFormElement = adForm.querySelectorAll('fieldset');
-const mapFilters = document.querySelector('.map__filters');
-const slider = adForm.querySelector('.ad-form__slider');
 const submitButton = adForm.querySelector('.ad-form__submit');
 const fetchURL = 'https://27.javascript.pages.academy/keksobooking';
 const timeIn = adForm.querySelector('#timein');
@@ -27,20 +24,6 @@ export const blockSubmitButton = () => {
 
 export const unblockSubmitButton = () => {
   submitButton.classList.remove('ad-form--disabled');
-};
-
-export const inactivPage = function () {
-  adForm.classList.add('ad-form--disabled');
-  adFormElement.forEach((element) => element.classList.add('disabled'));
-  mapFilters.classList.add('ad-form--disabled');
-  slider.classList.add('disabled');
-};
-
-export const activePage = function () {
-  adForm.classList.remove('ad-form--disabled');
-  adFormElement.forEach((element) => element.classList.remove('disabled'));
-  mapFilters.classList.remove('ad-form--disabled');
-  slider.classList.remove('disabled');
 };
 
 export const pristine = new Pristine(adForm, {
@@ -107,8 +90,12 @@ const successDataAction = () => {
   openSuccessMessage();
   unblockSubmitButton();
   resetFormForAllElements();
-  console.log('ff')
-}
+};
+
+const errorDataActions = () => {
+  openErrorMessage();
+  unblockSubmitButton();
+};
 
 adForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
@@ -117,5 +104,5 @@ adForm.addEventListener('submit', (evt) => {
   }
   blockSubmitButton();
   const formData = new FormData(evt.target);
-  sendData(successDataAction, openErrorMessage, fetchURL, formData);
+  sendData(successDataAction, errorDataActions, fetchURL, formData);
 });

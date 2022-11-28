@@ -1,9 +1,13 @@
 import { getData } from './api.js';
-import { activePage } from './form.js';
+import { showAlert } from './auxiliary-messages.js';
 import { createCard } from './create-card.js';
 import { tenCardElements, getFilteredData } from './filter.js';
-import { openErrorMessage } from './auxiliary-messages.js';
-const fetchURLData = 'https://27.javascript.pages.academy/keksobooking/data';
+
+const adForm = document.querySelector('.ad-form');
+const mapForm = document.querySelector('.map__filters');
+const mapFormFields = mapForm.children;
+const adFormFields = adForm.children;
+const fetchURLData = 'https://27.jaript.pages.academy/keksobooking/data';
 const COUNTRY_CENTER_LAT = 35.6761919;
 const COUNTRY_CENTER_LNG = 139.6503106;
 const ZOOM_OF_MAP = 10;
@@ -13,9 +17,20 @@ const ICON_SIZE = [40, 40];
 const ICON_ANCHOR = [20, 40];
 const addressElement = document.querySelector('#address');
 
+export const activatePage = (activate = false) => {
+  mapForm.classList[activate ? 'remove' : 'add']('map__filters--disabled');
+  adForm.classList[activate ? 'remove' : 'add']('ad-form--disabled');
+  for (const mapFormField of mapFormFields){
+    mapFormField[activate ? 'removeAttribute' : 'setAttribute']('disabled', 'disabled');
+  }
+  for (const adFormField of adFormFields) {
+    adFormField[activate ? 'removeAttribute' : 'setAttribute']('disabled', 'disabled');
+  }
+};
+
 export const map = L.map('map-canvas')
   .on('load', () => {
-    getData(getFilteredData, openErrorMessage, fetchURLData);
+    getData(getFilteredData, showAlert, fetchURLData);
   })
   .setView({
     lat: COUNTRY_CENTER_LAT,
@@ -93,7 +108,7 @@ export const createMarker = (cards = tenCardElements) => {
       .addTo(markerGroup)
       .bindPopup(createCard(cards[i]));
   }
-  activePage();
+  activatePage(true);
 };
 
 export const closePopup = () => {

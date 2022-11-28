@@ -10,8 +10,8 @@ export const getData = (onSuccess, onError, url) => {
     .then((data) => {
       onSuccess(data);
     })
-    .catch((err) => {
-      onError(err);
+    .catch(() => {
+      onError('ОШИБКА ЗАГРУЗКИ ДАННЫХ');
     });
 };
 
