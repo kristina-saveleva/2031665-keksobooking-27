@@ -22,12 +22,8 @@ noUiSlider.create(sliderElement, {
   step: 1,
   connect: 'lower',
   format: {
-    to: (value) => {
-      return value.toFixed(0);
-    },
-    from: (value) => {
-      return parseFloat(value);
-    },
+    to: (value) => value.toFixed(0),
+    from: (value) => parseFloat(value)
   },
 });
 

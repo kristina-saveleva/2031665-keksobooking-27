@@ -46,15 +46,11 @@ const roomOption = {
   '100': ['0']
 };
 
-let validateDelivery = () => {
-  return roomOption[roomField.value].includes(capacityField.value);
-}
+const validateDelivery = () => roomOption[roomField.value].includes(capacityField.value);
 
-let getDeliveryErrorMessage = () => {
-  return `
+const getDeliveryErrorMessage = () => `
   ${roomField.value === '100' ? 'Такое количество гостей невозможно' : 'Количество гостей не соответствует количеству комнат'}
   `;
-}
 
 pristine.addValidator(capacityField, validateDelivery, getDeliveryErrorMessage);
 

@@ -29,11 +29,11 @@ export const activatePageForm = (activate = false) => {
   for (const adFormField of adFormFields) {
     adFormField[activate ? 'removeAttribute' : 'setAttribute']('disabled', 'disabled');
   }
-}
+};
 
 export const initialMainMarkerValue = () => {
-  return addressElement.value = `${(COUNTRY_CENTER_LAT).toFixed(5)}, ${(COUNTRY_CENTER_LNG).toFixed(5)}`;
-}
+  addressElement.value = `${(COUNTRY_CENTER_LAT).toFixed(5)}, ${(COUNTRY_CENTER_LNG).toFixed(5)}`;
+};
 
 export const map = L.map('map-canvas')
   .on('load', () => {
