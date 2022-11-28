@@ -1,4 +1,5 @@
 import { isEscapeKey } from './util.js';
+import { activatePage } from './map.js'
 const body = document.querySelector('body');
 const ALERT_OPEN_TIME = 5000;
 
@@ -22,6 +23,7 @@ export const showAlert = (message) => {
   setTimeout(() => {
     alertMessage.remove();
   }, ALERT_OPEN_TIME);
+  activatePage(false);
 };
 
 const sucsessMessageTemplate = document.querySelector('#success').content.querySelector('.success');
